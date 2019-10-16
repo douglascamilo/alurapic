@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'alurapic';
+  title = 'Alurapic';
+  description = 'Carro Esportivo';
+  url = 'https://cdn.pixabay.com/photo/2019/07/28/16/23/nissan-4368962_960_720.jpg';
 }
