@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-photo',
@@ -6,8 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent implements OnInit {
-  description = 'Carro Esportivo';
-  url = 'https://cdn.pixabay.com/photo/2019/07/28/16/23/nissan-4368962_960_720.jpg';
+  @Input() url = '';
+  @Input() description = '';
 
   constructor() {
   }
