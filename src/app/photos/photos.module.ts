@@ -15,9 +15,6 @@ import { PhotoFormComponent } from './photo-form/photo-form.component';
   imports: [
     CommonModule,
     HttpClientModule
-  ],
-  exports: [
-    PhotoListComponent
   ]
 })
 export class PhotosModule { }
