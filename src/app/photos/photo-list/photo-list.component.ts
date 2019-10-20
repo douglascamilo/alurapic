@@ -42,7 +42,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
       .subscribe(photosResponse => {
         this.photos = this.photos.concat(photosResponse);
 
-        this.hasMore = photosResponse.length;
+        this.hasMore = photosResponse.length > 0;
       })
   }
 }
