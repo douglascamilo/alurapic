@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/auth/auth.service';
 
@@ -13,7 +14,8 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -29,13 +31,17 @@ export class SignInComponent implements OnInit {
     this.authService
       .authenticate(userName, password)
       .subscribe(
-        success => {
-          console.log("Login successful!");
-        },
-        error => {
-          console.log("Login failed!");
-          this.loginForm.reset();
-        }
+        () => this.navigateToHome(userName),
+        error => this.handleLoginFailed(error)
       );
+  }
+
+  private handleLoginFailed(error) {
+    console.log(error);
+    this.loginForm.reset();
+  }
+
+  private navigateToHome(userName: string) {
+    this.router.navigate(['user', userName])
   }
 }
