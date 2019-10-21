@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { AuthService } from '../../core/auth/auth.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
   loginForm: FormGroup;
 
   constructor(
@@ -39,6 +40,7 @@ export class SignInComponent implements OnInit {
   private handleLoginFailed(error) {
     console.log(error);
     this.loginForm.reset();
+    this.userNameInput.nativeElement.focus();
   }
 
   private navigateToHome(userName: string) {
