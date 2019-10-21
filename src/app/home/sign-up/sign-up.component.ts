@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AlurapicValidators } from '../../shared/validators/alurapic.validators';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html'
@@ -31,9 +33,9 @@ export class SignUpComponent implements OnInit {
   private defineUserNameInput() {
     return ['', [
       Validators.required,
-      Validators.pattern(/^[a-z0-9_\-]+$/),
       Validators.minLength(2),
       Validators.maxLength(30),
+      AlurapicValidators.lowercase
     ]];
   }
 
