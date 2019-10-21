@@ -1,23 +1,59 @@
 <h4 class="text-center">Register to embrace a new world!</h4>
 
-<form class="form mt-4">
+<form [formGroup]="signupForm" class="form mt-4">
   <div class="form-group">
-    <input class="form-control" placeholder="email" autofocus>
+    <input formControlName="email" class="form-control" placeholder="email" autofocus>
+    <app-v-message
+      *ngIf="signupForm.get('email').errors?.required"
+      message="Email is required!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('email').errors?.email"
+      message="Invalid email!"></app-v-message>
   </div>
 
   <div class="form-group">
-    <input class="form-control" placeholder="full name">
+    <input formControlName="fullName" class="form-control" placeholder="full name">
+    <app-v-message
+      *ngIf="signupForm.get('fullName').errors?.required"
+      message="Full name is required!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('fullName').errors?.minlength"
+      message="Full name min length!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('fullName').errors?.maxlength"
+      message="Full name max length!"></app-v-message>
   </div>
 
   <div class="form-group">
-    <input class="form-control" placeholder="user name">
+    <input formControlName="userName" class="form-control" placeholder="user name">
+    <app-v-message
+      *ngIf="signupForm.get('userName').errors?.required"
+      message="User name is required!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('userName').errors?.minlength"
+      message="User name min length!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('userName').errors?.maxlength"
+      message="User name max length!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('userName').errors?.pattern"
+      message="Must be lowercase!"></app-v-message>
   </div>
 
   <div class="form-group">
-    <input type="password" class="form-control" placeholder="password">
+    <input formControlName="password" type="password" class="form-control" placeholder="password">
+    <app-v-message
+      *ngIf="signupForm.get('password').errors?.required"
+      message="Password is required!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('password').errors?.minlength"
+      message="Password min length!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('password').errors?.maxlength"
+      message="Password max length!"></app-v-message>
   </div>
 
   <button class="btn btn-primary btn-block">Register</button>
 
-  <p>Already an user?<a [routerLink]="['']">Sign In!  </a></p>
+  <p>Already an user?<a [routerLink]="['']">Sign In!</a></p>
 </form>
