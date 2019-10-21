@@ -11,7 +11,7 @@ import { PlatformDetectorService } from '../../core/platform-detector/platform-d
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userNameInput', {static: true}) userNameInput: ElementRef<HTMLInputElement>;
   loginForm: FormGroup;
 
   constructor(
