@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AlurapicValidators } from '../../shared/validators/alurapic.validators';
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
+import { NewUser } from './new-user';
+import { SignUpService } from './sign-up.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +16,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userNotTakenValidatorService: UserNotTakenValidatorService) { }
+    private userNotTakenValidatorService: UserNotTakenValidatorService,
+    private signUpService: SignUpService,
+    private router: Router) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -22,6 +27,16 @@ export class SignUpComponent implements OnInit {
       userName: this.defineUserNameInput(),
       password: this.definePasswordInput(),
     });
+  }
+
+  signup() {
+    const newUser = this.signupForm.getRawValue() as NewUser;
+    this.signUpService
+      .signup(newUser)
+      .subscribe(
+        () => this.router.navigate(['']),
+        error => console.log(error)
+      );
   }
 
   private definePasswordInput() {
