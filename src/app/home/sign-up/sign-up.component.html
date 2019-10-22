@@ -38,6 +38,12 @@
     <app-v-message
       *ngIf="signupForm.get('userName').errors?.lowercase"
       message="Must be lowercase!"></app-v-message>
+    <app-v-message
+      *ngIf="signupForm.get('userName').errors?.userNameTaken"
+      message="Username already taken!"></app-v-message>
+    <small
+      *ngIf="signupForm.get('userName').valid"
+      class="text-success">User available</small>
   </div>
 
   <div class="form-group">
@@ -53,7 +59,9 @@
       message="Password max length!"></app-v-message>
   </div>
 
-  <button class="btn btn-primary btn-block">Register</button>
+  <button
+    [disabled]="signupForm.invalid || signupForm.pending"
+    class="btn btn-primary btn-block">Register</button>
 
   <p>Already an user?<a [routerLink]="['']">Sign In!</a></p>
 </form>

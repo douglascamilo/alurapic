@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AlurapicValidators } from '../../shared/validators/alurapic.validators';
+import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +12,8 @@ export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private userNotTakenValidatorService: UserNotTakenValidatorService) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -23,34 +25,49 @@ export class SignUpComponent implements OnInit {
   }
 
   private definePasswordInput() {
-    return ['', [
+    const defaultValue = '';
+    const validators = [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(14),
-    ]];
+    ];
+
+    return [defaultValue, validators];
   }
 
   private defineUserNameInput() {
-    return ['', [
+    const defaultValue = '';
+    const validators = [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(30),
       AlurapicValidators.lowercase
-    ]];
+    ];
+    const asyncValidators = [
+      this.userNotTakenValidatorService.checkUserNameTaken()
+    ];
+
+    return [defaultValue, validators, asyncValidators];
   }
 
   private defineFullNameInput() {
-    return ['', [
+    const defaultValue = '';
+    const validators = [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(40),
-    ]];
+    ];
+
+    return [defaultValue, validators];
   }
 
   private defineEmailInput() {
-    return ['', [
+    const defaultValue = '';
+    const validators = [
       Validators.required,
       Validators.email
-    ]];
+    ];
+
+    return [defaultValue, validators];
   }
 }
