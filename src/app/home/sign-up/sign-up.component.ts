@@ -10,7 +10,8 @@ import { PlatformDetectorService } from '../../core/platform-detector/platform-d
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html'
+  templateUrl: './sign-up.component.html',
+  providers: [ UserNotTakenValidatorService ]
 })
 export class SignUpComponent implements OnInit {
   @ViewChild('emailInput', { static: true }) emailInput: ElementRef<HTMLInputElement>;
