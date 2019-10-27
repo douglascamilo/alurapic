@@ -36,8 +36,9 @@ export class SignUpComponent implements OnInit {
   }
 
   private onSetFocusEmailInput() {
-    this.platformDetectorService.isPlatformBrowse()
-        && this.emailInput.nativeElement.focus();
+    if (this.platformDetectorService.isPlatformBrowse()) {
+      this.emailInput.nativeElement.focus();
+    }
   }
 
   signup() {

@@ -1,3 +1,4 @@
+import { GreetingModule } from './../tests/greeting/greeting.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +23,8 @@ import { SignUpService } from './sign-up/sign-up.service';
     FormsModule,
     VMessageModule,
     RouterModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    GreetingModule
   ],
   providers: [ SignUpService ]
 })

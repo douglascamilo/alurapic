@@ -1,3 +1,5 @@
+import { GreetingTypeEnum } from '../../tests/greeting/greeting-type-enum.enum';
+import { GreetingInstanceService } from '../../tests/greeting/greeting-instance.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +10,7 @@ import { PlatformDetectorService } from '../../core/platform-detector/platform-d
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
   @ViewChild('userNameInput', {static: true}) userNameInput: ElementRef<HTMLInputElement>;
@@ -18,7 +20,8 @@ export class SignInComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private platformDetectorService: PlatformDetectorService) { }
+    private platformDetectorService: PlatformDetectorService,
+    private greetingsInstance: GreetingInstanceService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -27,6 +30,15 @@ export class SignInComponent implements OnInit {
     });
 
     this.setFocusOnUserNameInput();
+
+    this.testGreetings();
+  }
+  testGreetings() {
+    const hello1 = this.greetingsInstance.getBy(GreetingTypeEnum.HELLO_1).sayHello();
+    const hello2 = this.greetingsInstance.getBy(GreetingTypeEnum.HELLO_2).sayHello();
+
+    console.log(`Greeting 1: ${hello1}`);
+    console.log(`Greeting 2: ${hello2}`);
   }
 
   login() {
@@ -54,6 +66,6 @@ export class SignInComponent implements OnInit {
   }
 
   private navigateToHome(userName: string) {
-    this.router.navigate(['user', userName])
+    this.router.navigate(['user', userName]);
   }
 }
